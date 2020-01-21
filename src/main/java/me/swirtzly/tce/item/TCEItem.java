@@ -28,10 +28,10 @@ public class TCEItem extends OverrideItem {
     }
 
     @Override
-    public boolean itemInteractionForEntity(ItemStack p_111207_1_, PlayerEntity p_111207_2_, LivingEntity p_111207_3_, Hand p_111207_4_) {
+    public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity entityIn, Hand hand) {
 
-        if (!p_111207_2_.world.isRemote) {
-            RayTraceResult rayTraceResult = TCEUtil.rayTraceWithEntities(p_111207_2_, 5, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE);
+        if (!player.world.isRemote) {
+            RayTraceResult rayTraceResult = TCEUtil.rayTraceWithEntities(player, 5, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE);
 
             if (rayTraceResult.getType() == RayTraceResult.Type.ENTITY) {
                 EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) rayTraceResult;
@@ -39,17 +39,17 @@ public class TCEItem extends OverrideItem {
                 CompoundNBT nbt = entity.serializeNBT();
                 System.out.println(nbt);
                 BlockPos oldEntityPos = entity.getPosition();
-                ServerWorld serverworld = (ServerWorld) p_111207_2_.getEntityWorld();
+                ServerWorld serverworld = (ServerWorld) player.getEntityWorld();
                 ScaledEntity item = (ScaledEntity) RegHandler.EntityEntries.ENTITY_SHRUNK.create(serverworld);
                 item.setEntity(entity);
-                item.setPosition(oldEntityPos.getX(), oldEntityPos.getY(), oldEntityPos.getZ());
+                item.setPosition(oldEntityPos.getX() + 0.5, oldEntityPos.getY(), oldEntityPos.getZ() + 0.5);
                 serverworld.summonEntity(item);
-                p_111207_2_.world.playSound(null, oldEntityPos.getX(), oldEntityPos.getY(), oldEntityPos.getY(), RegHandler.Sounds.TCE_SHRINK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.world.playSound(null, oldEntityPos.getX(), oldEntityPos.getY(), oldEntityPos.getY(), RegHandler.Sounds.TCE_SHRINK, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 entity.remove();
             }
         }
 
-        return super.itemInteractionForEntity(p_111207_1_, p_111207_2_, p_111207_3_, p_111207_4_);
+        return super.itemInteractionForEntity(stack, player, entityIn, hand);
     }
 
     @Override

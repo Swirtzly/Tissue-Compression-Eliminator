@@ -18,21 +18,22 @@ public class RenderScaledEntity extends EntityRenderer<ScaledEntity> {
 
     private EntityRenderer render = null;
 
-    public RenderScaledEntity(EntityRendererManager p_i46179_1_) {
-        super(p_i46179_1_);
+    public RenderScaledEntity(EntityRendererManager renderer) {
+        super(renderer);
     }
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(ScaledEntity p_110775_1_) {
+    protected ResourceLocation getEntityTexture(ScaledEntity entity) {
         return null;
     }
-
+    
+    //doRender
     @Override
-    public void func_76986_a(ScaledEntity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
+    public void func_76986_a(ScaledEntity entity, double x, double y, double z, float entityYaw, float partialTicks) {
         GlStateManager.pushMatrix();
         GlStateManager.scalef(0.2f, 0.2f, 0.2f);
-        Minecraft.getInstance().getRenderManager().func_188388_a(TCEUtil.createEntity(p_76986_1_.getEntityTag(), p_76986_1_.world), 1, true);
+        Minecraft.getInstance().getRenderManager().func_188388_a(TCEUtil.createEntity(entity.getEntityTag(), entity.world), 1, true);
         GlStateManager.popMatrix();
     }
 
