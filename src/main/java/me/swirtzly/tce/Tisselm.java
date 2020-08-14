@@ -1,6 +1,5 @@
 package me.swirtzly.tce;
 
-import me.swirtzly.tce.entity.ScaledEntity;
 import me.swirtzly.tce.renders.RenderScaledEntity;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;

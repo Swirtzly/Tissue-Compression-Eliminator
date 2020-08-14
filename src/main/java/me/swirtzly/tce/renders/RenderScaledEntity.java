@@ -1,7 +1,6 @@
 package me.swirtzly.tce.renders;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import me.swirtzly.tce.entity.ScaledEntity;
 import me.swirtzly.tce.util.TCEUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;

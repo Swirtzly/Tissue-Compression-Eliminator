@@ -13,14 +13,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
-group = 'me.swirtzly.tce' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'tisselm'
+version = "${mod_version}"
+group = 'me.swirtzly' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "${project.jar_name}-${minecraft_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200113-mixed-1.15.1'
+    mappings channel: "${mappings_type}", version: "${mappings_version}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -87,7 +87,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.1.114'
+    minecraft "net.minecraftforge:forge:${forge_version}"
 }
 
 jar {

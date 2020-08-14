@@ -1,7 +1,6 @@
 package me.swirtzly.tce.handlers;
 
 import me.swirtzly.tce.entity.OverideItemEntity;
-import me.swirtzly.tce.entity.ScaledEntity;
 import me.swirtzly.tce.item.TCEItem;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -52,15 +51,6 @@ public class RegHandler {
                 .setCustomClientFactory((spawnEntity, world) -> new OverideItemEntity(world))
                 .build(MODID + ":item_override")
                 .setRegistryName(new ResourceLocation(MODID, "item_override")));
-
-        reg.register(EntityEntries.ENTITY_SHRUNK = EntityType.Builder.<ScaledEntity>create(ScaledEntity::new, EntityClassification.MISC)
-                .size(0.5F, 0.2F)
-                .setTrackingRange(128)
-                .setUpdateInterval(1)
-                .setShouldReceiveVelocityUpdates(true)
-                .setCustomClientFactory((spawnEntity, world) -> new ScaledEntity(world))
-                .build(MODID + ":entity_shrunk")
-                .setRegistryName(new ResourceLocation(MODID, "entity_shrunk")));
     }
 
     private static Item setUpItem(Item item, String name) {
@@ -80,7 +70,6 @@ public class RegHandler {
     @ObjectHolder(MODID)
     public static class EntityEntries {
         public static EntityType ITEM_OVERRIDE_ENTITY_TYPE = null;
-        public static EntityType ENTITY_SHRUNK = null;
     }
 
     @ObjectHolder(MODID)
