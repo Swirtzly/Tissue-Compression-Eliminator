@@ -18,10 +18,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("tce_mod")
+@Mod(TCEMod.MODID)
 public class TCEMod {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static String MODID = "tce_mod";
+    public static final String MODID = "tce_mod";
 
     public TCEMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
