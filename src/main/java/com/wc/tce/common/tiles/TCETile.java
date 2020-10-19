@@ -9,6 +9,8 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import java.util.Optional;
+
 public class TCETile extends TileEntity {
 
     private CompoundNBT entity = null;
@@ -18,7 +20,8 @@ public class TCETile extends TileEntity {
     }
 
     public static Entity createEntity(CompoundNBT compoundNBT, World world) {
-        return EntityType.loadEntityUnchecked(compoundNBT, world).get();
+        Optional<Entity> entityInstance = EntityType.loadEntityUnchecked(compoundNBT, world);
+        return entityInstance.orElse(null);
     }
 
     public CompoundNBT getEntity() {

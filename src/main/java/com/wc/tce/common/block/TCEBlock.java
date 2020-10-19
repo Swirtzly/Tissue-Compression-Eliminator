@@ -6,6 +6,7 @@ import com.wc.tce.common.tiles.TCETile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,10 +16,15 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class TCEBlock extends Block {
+
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
+
     public TCEBlock() {
         super(Block.Properties.create(Material.IRON, MaterialColor.ADOBE).notSolid());
     }
@@ -53,4 +59,10 @@ public class TCEBlock extends Block {
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SHAPE;
+    }
+
 }
