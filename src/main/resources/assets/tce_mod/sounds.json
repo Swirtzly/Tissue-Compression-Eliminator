@@ -1,10 +1,10 @@
 {
   "tce_shrink": {
     "category": "ambient",
-    "subtitle": "tisselm.subtitles.tce_shrink",
+    "subtitle": "tce_mod.subtitles.tce_shrink",
     "sounds": [
       {
-        "name": "tisselm:tce_shrink",
+        "name": "tce_mod:tce_shrink",
         "stream": false
       }
     ]

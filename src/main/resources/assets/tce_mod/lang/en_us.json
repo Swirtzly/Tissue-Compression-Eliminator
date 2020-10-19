@@ -1,4 +1,7 @@
 {
   "itemGroup.tce_mod.main": "Tissue Compression Eliminator",
-  "item.tce_mode.tce": "Tissue Compression Eliminator"
+  "item.tce_mod.tce": "Tissue Compression Eliminator",
+  "item.tce_mod.block_placer":"Shrunken Entity",
+  
+  "tce_mod.subtitles.tce_shrink":"Entity Shrunk"
 }

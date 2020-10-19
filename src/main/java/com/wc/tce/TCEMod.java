@@ -3,6 +3,7 @@ package com.wc.tce;
 import com.wc.tce.client.RenderTCE;
 import com.wc.tce.common.block.TCEBlocks;
 import com.wc.tce.common.item.TCEItems;
+import com.wc.tce.common.sounds.TCESounds;
 import com.wc.tce.common.tiles.TCETiles;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+
 @Mod(TCEMod.MODID)
 public class TCEMod {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -25,7 +26,6 @@ public class TCEMod {
 
     public TCEMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
 
@@ -47,6 +47,7 @@ public class TCEMod {
         TCEItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TCEBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TCETiles.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TCESounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 }

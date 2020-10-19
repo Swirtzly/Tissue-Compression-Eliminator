@@ -27,7 +27,7 @@ public class TCETile extends TileEntity {
 
     public void setEntity(Entity renderEntity) {
         entity = new CompoundNBT();
-        renderEntity.writeUnlessRemoved(entity);
+        renderEntity.writeUnlessRemoved(entity); //TODO: Fix crash with Endermen Class casting
         sendUpdates();
     }
 
