@@ -2,45 +2,49 @@ package com.wc.tce.common.item;
 
 import com.wc.tce.common.block.TCEBlocks;
 import com.wc.tce.common.tiles.TCETile;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TCEBlockItem extends Item {
+public class TCEBlockItem extends BlockItem {
 
     public TCEBlockItem() {
-        super(new Properties());
+        super(TCEBlocks.MOB.get(), new Properties());
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        BlockPos pos = context.getPos();
-        PlayerEntity player = context.getPlayer();
-        BlockPos checkPos = pos.up();
-        if (!player.world.isRemote) {
-            //TODO Support replaceable blocks (Leaves etc)
-            if (player.world.isAirBlock(checkPos)) {
-                player.world.setBlockState(checkPos, TCEBlocks.MOB.get().getDefaultState());
-                TCETile tile = (TCETile) player.world.getTileEntity(checkPos);
-                if (tile != null) {
-                    System.out.println(context.getItem() + " ||" + getEntity(context.getItem()));
-                    tile.setEntity(getEntity(context.getItem()));
-                    tile.sendUpdates();
-                }
-                if(!player.isCreative()){
-                    context.getItem().shrink(1);
-                }
-            }
-        }
-        return super.onItemUse(context);
+    public ActionResultType tryPlace(BlockItemUseContext context) {
+        ActionResultType result = super.tryPlace(context);
+        if (result != ActionResultType.SUCCESS) return ActionResultType.FAIL;
+        return ActionResultType.PASS;
     }
 
+
+    @Override
+    protected boolean onBlockPlaced(BlockPos pos, World worldIn, PlayerEntity player, ItemStack stack, BlockState state) {
+        super.onBlockPlaced(pos, worldIn, player, stack, state);
+        TCETile tile = (TCETile) player.world.getTileEntity(pos);
+        if (tile != null) {
+            tile.setEntity(getEntity(stack));
+            tile.sendUpdates();
+
+            if (!player.world.isRemote) {
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
@@ -56,6 +60,9 @@ public class TCEBlockItem extends Item {
     }
 
     public static CompoundNBT getEntity(ItemStack stack) {
-        return (CompoundNBT) stack.getTag().get("entity");
+        if (stack.getTag() != null) {
+            return (CompoundNBT) stack.getTag().get("entity");
+        }
+        return null;
     }
 }

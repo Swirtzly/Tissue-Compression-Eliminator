@@ -19,11 +19,11 @@ public class RenderTCE extends TileEntityRenderer<TCETile> {
     @Override
     public void render(TCETile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.getEntity() == null) return;
-        matrixStackIn.scale(0.2F, 0.2F, 0.2F);
-        matrixStackIn.translate(2.5, 0, 2.5);
-        Entity entity = TCETile.createEntity(tileEntityIn.getEntity(), Minecraft.getInstance().world);
-        if(entity == null) return;
-        EntityRenderer<? super Entity> renderer = Minecraft.getInstance().getRenderManager().getRenderer(entity);
-        renderer.render(entity, entity.rotationYaw, 0, matrixStackIn, bufferIn, 15728880); //TODO They fucking glow at night....
+            matrixStackIn.scale(0.2F, 0.2F, 0.2F);
+            matrixStackIn.translate(2.5, 0, 2.5);
+            Entity entity = TCETile.createEntity(tileEntityIn.getEntity(), Minecraft.getInstance().world);
+            if (entity == null) return;
+            EntityRenderer<? super Entity> renderer = Minecraft.getInstance().getRenderManager().getRenderer(entity);
+            renderer.render(entity, entity.rotationYaw, 0, matrixStackIn, bufferIn, 15728880); //TODO They fucking glow at night....
     }
 }

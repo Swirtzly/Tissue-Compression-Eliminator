@@ -3,6 +3,7 @@ package com.wc.tce.common.item;
 import com.wc.tce.common.block.TCEBlocks;
 import com.wc.tce.common.sounds.TCESounds;
 import com.wc.tce.common.tiles.TCETile;
+import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -23,7 +24,7 @@ public class ItemTCE extends Item {
     public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity player, LivingEntity target, Hand hand) {
 
         if (!player.world.isRemote) {
-            if (!(target instanceof ServerPlayerEntity)) {
+            if (!(target instanceof ServerPlayerEntity) && !(target instanceof IAngerable)) {
                 boolean canContinue = false;
                 for (ItemStack itemStack : player.inventory.mainInventory) {
                     if (itemStack.getItem() == Items.REDSTONE) {
