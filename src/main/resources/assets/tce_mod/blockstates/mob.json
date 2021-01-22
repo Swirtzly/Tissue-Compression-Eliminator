@@ -1,0 +1,7 @@
+{
+    "variants":{
+	    "":{
+		    "model":"tce_mod:block/invis"
+	    }
+    }
+}
